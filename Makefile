@@ -31,7 +31,7 @@ Frontend/TestInstant : Frontend/AbsInstant.hs Frontend/LexInstant.hs Frontend/Pa
 	${GHC} ${GHC_OPTS} $@
 
 jvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs
-	ghc -o jvm src/JVM.hs
+	ghc -o jvm src/JVM/JVM.hs
 # Rules for cleaning generated files.
 
 clean :
