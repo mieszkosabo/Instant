@@ -1,7 +1,7 @@
 module Src.JVM.Types where
 
-import qualified Data.Map as M
 import Control.Monad.State
+import qualified Data.Map as M
 
 type Store = M.Map String Integer
 

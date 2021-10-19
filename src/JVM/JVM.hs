@@ -22,4 +22,5 @@ main :: IO ()
 main = do
   files <- getArgs
   (Prog stmts) <- parseFile $ head files
-  print $ runJVMIC stmts
+  let cmds = foldr (\cmd acc -> cmd ++ "\n" ++ acc) "" (runJVMIC stmts)
+  putStr cmds

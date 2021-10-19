@@ -3,7 +3,7 @@ module Src.JVM.GenerateCode.GenerateCode where
 import Frontend.AbsInstant
 import Src.JVM.RequiredStackSize.RequiredStackSize (requiredStackSize)
 import Src.JVM.Types
-import Src.JVM.Utils.Utils
+import Src.JVM.Utils.Utils as Utils
 
 generateCodeExp :: Exp -> JVMIC [String]
 generateCodeExp (ExpAdd e e') = do
@@ -27,9 +27,11 @@ generateCodeExp (ExpMul e e') = do
   if reqSize < reqSize'
     then return $ code ++ code' ++ ["imul"]
     else return $ code' ++ code ++ ["imul"]
-
--- TODO
-generateCodeExp (ExpVar ident) = undefined
+generateCodeExp (ExpVar (Ident ident)) = do
+  idx <- Utils.lookup ident
+  if idx == -1
+    then return [push 0] -- converting undeclared variables to 0s
+    else return [load idx]
 
 generateCodeStmt :: Stmt -> JVMIC [String]
 -- evaluate expr and print its value
@@ -40,5 +42,7 @@ generateCodeStmt (SExp e) = do
       ++ [ "getstatic java/lang/System/out Ljava/io/PrintStream;",
            "invokevirtual java/io/PrintStream/println(I)V"
          ]
--- TODO
-generateCodeStmt (SAss ident e) = undefined
+generateCodeStmt (SAss (Ident ident) e) = do
+  code <- generateCodeExp e
+  idx <- Utils.assign ident
+  return $ code ++ [store idx]
