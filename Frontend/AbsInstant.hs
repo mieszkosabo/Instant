@@ -4,7 +4,7 @@
 
 -- | The abstract syntax of language Instant.
 
-module AbsInstant where
+module Frontend.AbsInstant where
 
 import Prelude (Integer, String)
 import qualified Prelude as C (Eq, Ord, Show, Read)

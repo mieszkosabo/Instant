@@ -7,9 +7,9 @@
 {-# LANGUAGE OverlappingInstances #-}
 #endif
 
--- | Pretty-printer for PrintInstant.
+-- | Pretty-printer for Frontend.
 
-module PrintInstant where
+module Frontend.PrintInstant where
 
 import Prelude
   ( ($), (.)
@@ -20,7 +20,7 @@ import Prelude
   , all, elem, foldr, id, map, null, replicate, shows, span
   )
 import Data.Char ( Char, isSpace )
-import qualified AbsInstant
+import qualified Frontend.AbsInstant
 
 -- | The top-level printing method.
 
@@ -138,27 +138,27 @@ instance Print Integer where
 instance Print Double where
   prt _ x = doc (shows x)
 
-instance Print AbsInstant.Ident where
-  prt _ (AbsInstant.Ident i) = doc $ showString i
-instance Print AbsInstant.Program where
+instance Print Frontend.AbsInstant.Ident where
+  prt _ (Frontend.AbsInstant.Ident i) = doc $ showString i
+instance Print Frontend.AbsInstant.Program where
   prt i = \case
-    AbsInstant.Prog stmts -> prPrec i 0 (concatD [prt 0 stmts])
+    Frontend.AbsInstant.Prog stmts -> prPrec i 0 (concatD [prt 0 stmts])
 
-instance Print AbsInstant.Stmt where
+instance Print Frontend.AbsInstant.Stmt where
   prt i = \case
-    AbsInstant.SAss id_ exp -> prPrec i 0 (concatD [prt 0 id_, doc (showString "="), prt 0 exp])
-    AbsInstant.SExp exp -> prPrec i 0 (concatD [prt 0 exp])
+    Frontend.AbsInstant.SAss id_ exp -> prPrec i 0 (concatD [prt 0 id_, doc (showString "="), prt 0 exp])
+    Frontend.AbsInstant.SExp exp -> prPrec i 0 (concatD [prt 0 exp])
 
-instance Print [AbsInstant.Stmt] where
+instance Print [Frontend.AbsInstant.Stmt] where
   prt _ [] = concatD []
   prt _ [x] = concatD [prt 0 x]
   prt _ (x:xs) = concatD [prt 0 x, doc (showString ";"), prt 0 xs]
 
-instance Print AbsInstant.Exp where
+instance Print Frontend.AbsInstant.Exp where
   prt i = \case
-    AbsInstant.ExpAdd exp1 exp2 -> prPrec i 1 (concatD [prt 2 exp1, doc (showString "+"), prt 1 exp2])
-    AbsInstant.ExpSub exp1 exp2 -> prPrec i 2 (concatD [prt 2 exp1, doc (showString "-"), prt 3 exp2])
-    AbsInstant.ExpMul exp1 exp2 -> prPrec i 3 (concatD [prt 3 exp1, doc (showString "*"), prt 4 exp2])
-    AbsInstant.ExpDiv exp1 exp2 -> prPrec i 3 (concatD [prt 3 exp1, doc (showString "/"), prt 4 exp2])
-    AbsInstant.ExpLit n -> prPrec i 4 (concatD [prt 0 n])
-    AbsInstant.ExpVar id_ -> prPrec i 4 (concatD [prt 0 id_])
+    Frontend.AbsInstant.ExpAdd exp1 exp2 -> prPrec i 1 (concatD [prt 2 exp1, doc (showString "+"), prt 1 exp2])
+    Frontend.AbsInstant.ExpSub exp1 exp2 -> prPrec i 2 (concatD [prt 2 exp1, doc (showString "-"), prt 3 exp2])
+    Frontend.AbsInstant.ExpMul exp1 exp2 -> prPrec i 3 (concatD [prt 3 exp1, doc (showString "*"), prt 4 exp2])
+    Frontend.AbsInstant.ExpDiv exp1 exp2 -> prPrec i 3 (concatD [prt 3 exp1, doc (showString "/"), prt 4 exp2])
+    Frontend.AbsInstant.ExpLit n -> prPrec i 4 (concatD [prt 0 n])
+    Frontend.AbsInstant.ExpVar id_ -> prPrec i 4 (concatD [prt 0 id_])

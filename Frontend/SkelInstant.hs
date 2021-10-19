@@ -4,10 +4,10 @@
 
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
-module SkelInstant where
+module Frontend.SkelInstant where
 
 import Prelude (($), Either(..), String, (++), Show, show)
-import qualified AbsInstant
+import qualified Frontend.AbsInstant
 
 type Err = Either String
 type Result = Err String
@@ -15,24 +15,24 @@ type Result = Err String
 failure :: Show a => a -> Result
 failure x = Left $ "Undefined case: " ++ show x
 
-transIdent :: AbsInstant.Ident -> Result
+transIdent :: Frontend.AbsInstant.Ident -> Result
 transIdent x = case x of
-  AbsInstant.Ident string -> failure x
+  Frontend.AbsInstant.Ident string -> failure x
 
-transProgram :: AbsInstant.Program -> Result
+transProgram :: Frontend.AbsInstant.Program -> Result
 transProgram x = case x of
-  AbsInstant.Prog stmts -> failure x
+  Frontend.AbsInstant.Prog stmts -> failure x
 
-transStmt :: AbsInstant.Stmt -> Result
+transStmt :: Frontend.AbsInstant.Stmt -> Result
 transStmt x = case x of
-  AbsInstant.SAss ident exp -> failure x
-  AbsInstant.SExp exp -> failure x
+  Frontend.AbsInstant.SAss ident exp -> failure x
+  Frontend.AbsInstant.SExp exp -> failure x
 
-transExp :: AbsInstant.Exp -> Result
+transExp :: Frontend.AbsInstant.Exp -> Result
 transExp x = case x of
-  AbsInstant.ExpAdd exp1 exp2 -> failure x
-  AbsInstant.ExpSub exp1 exp2 -> failure x
-  AbsInstant.ExpMul exp1 exp2 -> failure x
-  AbsInstant.ExpDiv exp1 exp2 -> failure x
-  AbsInstant.ExpLit integer -> failure x
-  AbsInstant.ExpVar ident -> failure x
+  Frontend.AbsInstant.ExpAdd exp1 exp2 -> failure x
+  Frontend.AbsInstant.ExpSub exp1 exp2 -> failure x
+  Frontend.AbsInstant.ExpMul exp1 exp2 -> failure x
+  Frontend.AbsInstant.ExpDiv exp1 exp2 -> failure x
+  Frontend.AbsInstant.ExpLit integer -> failure x
+  Frontend.AbsInstant.ExpVar ident -> failure x

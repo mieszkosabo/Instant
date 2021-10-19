@@ -5,7 +5,7 @@
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns -fno-warn-overlapping-patterns #-}
 {-# LANGUAGE PatternSynonyms #-}
 
-module ParInstant
+module Frontend.ParInstant
   ( happyError
   , myLexer
   , pProgram
@@ -20,8 +20,8 @@ module ParInstant
 
 import Prelude
 
-import qualified AbsInstant
-import LexInstant
+import qualified Frontend.AbsInstant
+import Frontend.LexInstant
 
 }
 
@@ -50,45 +50,47 @@ import LexInstant
 
 %%
 
-Ident :: { AbsInstant.Ident }
-Ident  : L_Ident { AbsInstant.Ident $1 }
+Ident :: { Frontend.AbsInstant.Ident }
+Ident  : L_Ident { Frontend.AbsInstant.Ident $1 }
 
 Integer :: { Integer }
 Integer  : L_integ  { (read $1) :: Integer }
 
-Program :: { AbsInstant.Program }
-Program : ListStmt { AbsInstant.Prog $1 }
+Program :: { Frontend.AbsInstant.Program }
+Program : ListStmt { Frontend.AbsInstant.Prog $1 }
 
-Stmt :: { AbsInstant.Stmt }
+Stmt :: { Frontend.AbsInstant.Stmt }
 Stmt
-  : Ident '=' Exp { AbsInstant.SAss $1 $3 }
-  | Exp { AbsInstant.SExp $1 }
+  : Ident '=' Exp { Frontend.AbsInstant.SAss $1 $3 }
+  | Exp { Frontend.AbsInstant.SExp $1 }
 
-ListStmt :: { [AbsInstant.Stmt] }
+ListStmt :: { [Frontend.AbsInstant.Stmt] }
 ListStmt
   : {- empty -} { [] }
   | Stmt { (:[]) $1 }
   | Stmt ';' ListStmt { (:) $1 $3 }
 
-Exp1 :: { AbsInstant.Exp }
-Exp1 : Exp2 '+' Exp1 { AbsInstant.ExpAdd $1 $3 } | Exp2 { $1 }
+Exp1 :: { Frontend.AbsInstant.Exp }
+Exp1
+  : Exp2 '+' Exp1 { Frontend.AbsInstant.ExpAdd $1 $3 } | Exp2 { $1 }
 
-Exp2 :: { AbsInstant.Exp }
-Exp2 : Exp2 '-' Exp3 { AbsInstant.ExpSub $1 $3 } | Exp3 { $1 }
+Exp2 :: { Frontend.AbsInstant.Exp }
+Exp2
+  : Exp2 '-' Exp3 { Frontend.AbsInstant.ExpSub $1 $3 } | Exp3 { $1 }
 
-Exp3 :: { AbsInstant.Exp }
+Exp3 :: { Frontend.AbsInstant.Exp }
 Exp3
-  : Exp3 '*' Exp4 { AbsInstant.ExpMul $1 $3 }
-  | Exp3 '/' Exp4 { AbsInstant.ExpDiv $1 $3 }
+  : Exp3 '*' Exp4 { Frontend.AbsInstant.ExpMul $1 $3 }
+  | Exp3 '/' Exp4 { Frontend.AbsInstant.ExpDiv $1 $3 }
   | Exp4 { $1 }
 
-Exp4 :: { AbsInstant.Exp }
+Exp4 :: { Frontend.AbsInstant.Exp }
 Exp4
-  : Integer { AbsInstant.ExpLit $1 }
-  | Ident { AbsInstant.ExpVar $1 }
+  : Integer { Frontend.AbsInstant.ExpLit $1 }
+  | Ident { Frontend.AbsInstant.ExpVar $1 }
   | '(' Exp ')' { $2 }
 
-Exp :: { AbsInstant.Exp }
+Exp :: { Frontend.AbsInstant.Exp }
 Exp : Exp1 { $1 }
 
 {

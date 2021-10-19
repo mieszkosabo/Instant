@@ -6,7 +6,7 @@
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns -fno-warn-overlapping-patterns #-}
 {-# LANGUAGE PatternSynonyms #-}
 
-module ParInstant
+module Frontend.ParInstant
   ( happyError
   , myLexer
   , pProgram
@@ -21,8 +21,8 @@ module ParInstant
 
 import Prelude
 
-import qualified AbsInstant
-import LexInstant
+import qualified Frontend.AbsInstant
+import Frontend.LexInstant
 import qualified Data.Array as Happy_Data_Array
 import qualified Data.Bits as Bits
 import qualified GHC.Exts as Happy_GHC_Exts
@@ -37,8 +37,8 @@ type HappyAny = Happy_GHC_Exts.Any
 #else
 type HappyAny = forall a . a
 #endif
-newtype HappyWrap11 = HappyWrap11 (AbsInstant.Ident)
-happyIn11 :: (AbsInstant.Ident) -> (HappyAbsSyn )
+newtype HappyWrap11 = HappyWrap11 (Frontend.AbsInstant.Ident)
+happyIn11 :: (Frontend.AbsInstant.Ident) -> (HappyAbsSyn )
 happyIn11 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap11 x)
 {-# INLINE happyIn11 #-}
 happyOut11 :: (HappyAbsSyn ) -> HappyWrap11
@@ -51,57 +51,57 @@ happyIn12 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap12 x)
 happyOut12 :: (HappyAbsSyn ) -> HappyWrap12
 happyOut12 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut12 #-}
-newtype HappyWrap13 = HappyWrap13 (AbsInstant.Program)
-happyIn13 :: (AbsInstant.Program) -> (HappyAbsSyn )
+newtype HappyWrap13 = HappyWrap13 (Frontend.AbsInstant.Program)
+happyIn13 :: (Frontend.AbsInstant.Program) -> (HappyAbsSyn )
 happyIn13 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap13 x)
 {-# INLINE happyIn13 #-}
 happyOut13 :: (HappyAbsSyn ) -> HappyWrap13
 happyOut13 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut13 #-}
-newtype HappyWrap14 = HappyWrap14 (AbsInstant.Stmt)
-happyIn14 :: (AbsInstant.Stmt) -> (HappyAbsSyn )
+newtype HappyWrap14 = HappyWrap14 (Frontend.AbsInstant.Stmt)
+happyIn14 :: (Frontend.AbsInstant.Stmt) -> (HappyAbsSyn )
 happyIn14 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap14 x)
 {-# INLINE happyIn14 #-}
 happyOut14 :: (HappyAbsSyn ) -> HappyWrap14
 happyOut14 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut14 #-}
-newtype HappyWrap15 = HappyWrap15 ([AbsInstant.Stmt])
-happyIn15 :: ([AbsInstant.Stmt]) -> (HappyAbsSyn )
+newtype HappyWrap15 = HappyWrap15 ([Frontend.AbsInstant.Stmt])
+happyIn15 :: ([Frontend.AbsInstant.Stmt]) -> (HappyAbsSyn )
 happyIn15 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap15 x)
 {-# INLINE happyIn15 #-}
 happyOut15 :: (HappyAbsSyn ) -> HappyWrap15
 happyOut15 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut15 #-}
-newtype HappyWrap16 = HappyWrap16 (AbsInstant.Exp)
-happyIn16 :: (AbsInstant.Exp) -> (HappyAbsSyn )
+newtype HappyWrap16 = HappyWrap16 (Frontend.AbsInstant.Exp)
+happyIn16 :: (Frontend.AbsInstant.Exp) -> (HappyAbsSyn )
 happyIn16 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap16 x)
 {-# INLINE happyIn16 #-}
 happyOut16 :: (HappyAbsSyn ) -> HappyWrap16
 happyOut16 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut16 #-}
-newtype HappyWrap17 = HappyWrap17 (AbsInstant.Exp)
-happyIn17 :: (AbsInstant.Exp) -> (HappyAbsSyn )
+newtype HappyWrap17 = HappyWrap17 (Frontend.AbsInstant.Exp)
+happyIn17 :: (Frontend.AbsInstant.Exp) -> (HappyAbsSyn )
 happyIn17 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap17 x)
 {-# INLINE happyIn17 #-}
 happyOut17 :: (HappyAbsSyn ) -> HappyWrap17
 happyOut17 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut17 #-}
-newtype HappyWrap18 = HappyWrap18 (AbsInstant.Exp)
-happyIn18 :: (AbsInstant.Exp) -> (HappyAbsSyn )
+newtype HappyWrap18 = HappyWrap18 (Frontend.AbsInstant.Exp)
+happyIn18 :: (Frontend.AbsInstant.Exp) -> (HappyAbsSyn )
 happyIn18 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap18 x)
 {-# INLINE happyIn18 #-}
 happyOut18 :: (HappyAbsSyn ) -> HappyWrap18
 happyOut18 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut18 #-}
-newtype HappyWrap19 = HappyWrap19 (AbsInstant.Exp)
-happyIn19 :: (AbsInstant.Exp) -> (HappyAbsSyn )
+newtype HappyWrap19 = HappyWrap19 (Frontend.AbsInstant.Exp)
+happyIn19 :: (Frontend.AbsInstant.Exp) -> (HappyAbsSyn )
 happyIn19 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap19 x)
 {-# INLINE happyIn19 #-}
 happyOut19 :: (HappyAbsSyn ) -> HappyWrap19
 happyOut19 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut19 #-}
-newtype HappyWrap20 = HappyWrap20 (AbsInstant.Exp)
-happyIn20 :: (AbsInstant.Exp) -> (HappyAbsSyn )
+newtype HappyWrap20 = HappyWrap20 (Frontend.AbsInstant.Exp)
+happyIn20 :: (Frontend.AbsInstant.Exp) -> (HappyAbsSyn )
 happyIn20 x = Happy_GHC_Exts.unsafeCoerce# (HappyWrap20 x)
 {-# INLINE happyIn20 #-}
 happyOut20 :: (HappyAbsSyn ) -> HappyWrap20
@@ -178,7 +178,7 @@ happyReduce_8 = happySpecReduce_1  0# happyReduction_8
 happyReduction_8 happy_x_1
 	 =  case happyOutTok happy_x_1 of { (PT _ (TV happy_var_1)) -> 
 	happyIn11
-		 (AbsInstant.Ident happy_var_1
+		 (Frontend.AbsInstant.Ident happy_var_1
 	)}
 
 happyReduce_9 = happySpecReduce_1  1# happyReduction_9
@@ -192,7 +192,7 @@ happyReduce_10 = happySpecReduce_1  2# happyReduction_10
 happyReduction_10 happy_x_1
 	 =  case happyOut15 happy_x_1 of { (HappyWrap15 happy_var_1) -> 
 	happyIn13
-		 (AbsInstant.Prog happy_var_1
+		 (Frontend.AbsInstant.Prog happy_var_1
 	)}
 
 happyReduce_11 = happySpecReduce_3  3# happyReduction_11
@@ -202,14 +202,14 @@ happyReduction_11 happy_x_3
 	 =  case happyOut11 happy_x_1 of { (HappyWrap11 happy_var_1) -> 
 	case happyOut20 happy_x_3 of { (HappyWrap20 happy_var_3) -> 
 	happyIn14
-		 (AbsInstant.SAss happy_var_1 happy_var_3
+		 (Frontend.AbsInstant.SAss happy_var_1 happy_var_3
 	)}}
 
 happyReduce_12 = happySpecReduce_1  3# happyReduction_12
 happyReduction_12 happy_x_1
 	 =  case happyOut20 happy_x_1 of { (HappyWrap20 happy_var_1) -> 
 	happyIn14
-		 (AbsInstant.SExp happy_var_1
+		 (Frontend.AbsInstant.SExp happy_var_1
 	)}
 
 happyReduce_13 = happySpecReduce_0  4# happyReduction_13
@@ -241,7 +241,7 @@ happyReduction_16 happy_x_3
 	 =  case happyOut17 happy_x_1 of { (HappyWrap17 happy_var_1) -> 
 	case happyOut16 happy_x_3 of { (HappyWrap16 happy_var_3) -> 
 	happyIn16
-		 (AbsInstant.ExpAdd happy_var_1 happy_var_3
+		 (Frontend.AbsInstant.ExpAdd happy_var_1 happy_var_3
 	)}}
 
 happyReduce_17 = happySpecReduce_1  5# happyReduction_17
@@ -258,7 +258,7 @@ happyReduction_18 happy_x_3
 	 =  case happyOut17 happy_x_1 of { (HappyWrap17 happy_var_1) -> 
 	case happyOut18 happy_x_3 of { (HappyWrap18 happy_var_3) -> 
 	happyIn17
-		 (AbsInstant.ExpSub happy_var_1 happy_var_3
+		 (Frontend.AbsInstant.ExpSub happy_var_1 happy_var_3
 	)}}
 
 happyReduce_19 = happySpecReduce_1  6# happyReduction_19
@@ -275,7 +275,7 @@ happyReduction_20 happy_x_3
 	 =  case happyOut18 happy_x_1 of { (HappyWrap18 happy_var_1) -> 
 	case happyOut19 happy_x_3 of { (HappyWrap19 happy_var_3) -> 
 	happyIn18
-		 (AbsInstant.ExpMul happy_var_1 happy_var_3
+		 (Frontend.AbsInstant.ExpMul happy_var_1 happy_var_3
 	)}}
 
 happyReduce_21 = happySpecReduce_3  7# happyReduction_21
@@ -285,7 +285,7 @@ happyReduction_21 happy_x_3
 	 =  case happyOut18 happy_x_1 of { (HappyWrap18 happy_var_1) -> 
 	case happyOut19 happy_x_3 of { (HappyWrap19 happy_var_3) -> 
 	happyIn18
-		 (AbsInstant.ExpDiv happy_var_1 happy_var_3
+		 (Frontend.AbsInstant.ExpDiv happy_var_1 happy_var_3
 	)}}
 
 happyReduce_22 = happySpecReduce_1  7# happyReduction_22
@@ -299,14 +299,14 @@ happyReduce_23 = happySpecReduce_1  8# happyReduction_23
 happyReduction_23 happy_x_1
 	 =  case happyOut12 happy_x_1 of { (HappyWrap12 happy_var_1) -> 
 	happyIn19
-		 (AbsInstant.ExpLit happy_var_1
+		 (Frontend.AbsInstant.ExpLit happy_var_1
 	)}
 
 happyReduce_24 = happySpecReduce_1  8# happyReduction_24
 happyReduction_24 happy_x_1
 	 =  case happyOut11 happy_x_1 of { (HappyWrap11 happy_var_1) -> 
 	happyIn19
-		 (AbsInstant.ExpVar happy_var_1
+		 (Frontend.AbsInstant.ExpVar happy_var_1
 	)}
 
 happyReduce_25 = happySpecReduce_3  8# happyReduction_25

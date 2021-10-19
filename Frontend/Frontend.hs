@@ -1,23 +1,22 @@
-module Main where
+module Frontend.Frontend where
 
-import AbsInstant
-import ErrM
-import ParInstant (myLexer, pProgram)
+import Frontend.AbsInstant
+import Frontend.ErrM
+import Frontend.ParInstant (myLexer, pProgram)
 import System.Environment (getArgs, getProgName)
 import System.Exit (exitFailure, exitSuccess)
 import System.IO (getContents, hGetContents, hPutStr, hPutStrLn, stderr, stdin)
 
-parse :: String -> IO ()
+parse :: String -> IO Program
 parse input =
   case pProgram (myLexer input) of
-    (Ok parsedProg) -> do
-      print parsedProg
+    (Ok parsedProg) -> return parsedProg
     (Bad msg) -> hPutStrLn stderr msg >> exitFailure
 
-parseFile :: String -> IO ()
+parseFile :: String -> IO Program
 parseFile filename = readFile filename >>= parse
 
-main :: IO ()
+main :: IO Program
 main = do
   files <- getArgs
   parseFile $ head files

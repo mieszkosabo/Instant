@@ -1,13 +1,13 @@
 {-# OPTIONS_GHC -fno-warn-unused-binds -fno-warn-missing-signatures #-}
 {-# LANGUAGE CPP,MagicHash #-}
-{-# LINE 4 "LexInstant.x" #-}
+{-# LINE 4 "Frontend/LexInstant.x" #-}
 
 {-# OPTIONS -fno-warn-incomplete-patterns #-}
 {-# OPTIONS_GHC -w #-}
 
 {-# LANGUAGE PatternSynonyms #-}
 
-module LexInstant where
+module Frontend.LexInstant where
 
 import Prelude
 
@@ -65,7 +65,7 @@ alex_actions = array (0 :: Int, 3)
   , (0,alex_action_3)
   ]
 
-{-# LINE 50 "LexInstant.x" #-}
+{-# LINE 50 "Frontend/LexInstant.x" #-}
 
 -- | Create a token with position.
 tok :: (String -> Tok) -> (Posn -> String -> Token)

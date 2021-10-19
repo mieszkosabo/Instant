@@ -18,11 +18,11 @@ import System.Environment ( getArgs )
 import System.Exit        ( exitFailure, exitSuccess )
 import Control.Monad      ( when )
 
-import AbsInstant   ()
-import LexInstant   ( Token, mkPosToken )
-import ParInstant   ( pProgram, myLexer )
-import PrintInstant ( Print, printTree )
-import SkelInstant  ()
+import Frontend.AbsInstant   ()
+import Frontend.LexInstant   ( Token, mkPosToken )
+import Frontend.ParInstant   ( pProgram, myLexer )
+import Frontend.PrintInstant ( Print, printTree )
+import Frontend.SkelInstant  ()
 
 type Err        = Either String
 type ParseFun a = [Token] -> Err a
