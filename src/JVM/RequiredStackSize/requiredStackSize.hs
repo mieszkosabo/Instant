@@ -16,4 +16,11 @@ requiredStackSize (ExpMul e e') = if req /= req' then max req req' else req + 1
 requiredStackSize (ExpLit _) = 1
 requiredStackSize (ExpVar _) = 1
 
+requiredStackSizeStmt :: Stmt -> Int
+requiredStackSizeStmt (SAss _ e) = requiredStackSize e
+requiredStackSizeStmt (SExp e) = requiredStackSize e
+
+requiredStackSizeForProgram :: [Stmt] -> Int
+requiredStackSizeForProgram = (foldr max 0) . (map requiredStackSizeStmt)
+
 
