@@ -35,7 +35,7 @@ jvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Fronte
 # Rules for cleaning generated files.
 
 clean :
-	-rm -f Frontend/*.hi Frontend/*.o Frontend/*.log Frontend/*.aux Frontend/*.dvi src/*.o src/*.hi jvm */*.hi */*.o */*.j */*.class */*.bc */*.ll
+	-rm -f Frontend/*.hi Frontend/*.o Frontend/*.log Frontend/*.aux Frontend/*.dvi src/*.o src/*.hi jvm */*/*/*.hi */*/*/*.o */*.j */*.class */*.bc */*.ll
 
 distclean : clean
 	-rm -f Frontend/AbsInstant.hs Frontend/AbsInstant.hs.bak Frontend/ComposOp.hs Frontend/ComposOp.hs.bak Frontend/DocInstant.txt Frontend/DocInstant.txt.bak Frontend/ErrM.hs Frontend/ErrM.hs.bak Frontend/LayoutInstant.hs Frontend/LayoutInstant.hs.bak Frontend/LexInstant.x Frontend/LexInstant.x.bak Frontend/ParInstant.y Frontend/ParInstant.y.bak Frontend/PrintInstant.hs Frontend/PrintInstant.hs.bak Frontend/SkelInstant.hs Frontend/SkelInstant.hs.bak Frontend/TestInstant.hs Frontend/TestInstant.hs.bak Frontend/XMLInstant.hs Frontend/XMLInstant.hs.bak Frontend/ASTInstant.agda Frontend/ASTInstant.agda.bak Frontend/ParserInstant.agda Frontend/ParserInstant.agda.bak Frontend/IOLib.agda Frontend/IOLib.agda.bak Frontend/Main.agda Frontend/Main.agda.bak Frontend/Instant.dtd Frontend/Instant.dtd.bak Frontend/TestInstant Frontend/LexInstant.hs Frontend/ParInstant.hs Frontend/ParInstant.info Frontend/ParDataInstant.hs Makefile

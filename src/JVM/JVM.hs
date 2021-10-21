@@ -8,7 +8,6 @@ import Src.JVM.GenerateCode.GenerateCode
 import Src.JVM.RequiredStackSize.RequiredStackSize (requiredStackSizeForProgram)
 import Src.JVM.Types
 import Src.Shared.Utils
-import Src.Shared.Compiler
 import System.Environment (getArgs, getProgName)
 import System.Process (callCommand)
 
