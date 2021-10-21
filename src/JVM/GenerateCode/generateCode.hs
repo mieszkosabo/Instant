@@ -38,10 +38,9 @@ generateCodeStmt :: Stmt -> JVMIC [String]
 generateCodeStmt (SExp e) = do
   code <- generateCodeExp e
   return $
-    code
-      ++ [ "getstatic java/lang/System/out Ljava/io/PrintStream;",
-           "invokevirtual java/io/PrintStream/println(I)V"
-         ]
+    ["getstatic java/lang/System/out Ljava/io/PrintStream;"]
+      ++ code
+      ++ ["invokevirtual java/io/PrintStream/println(I)V"]
 generateCodeStmt (SAss (Ident ident) e) = do
   code <- generateCodeExp e
   idx <- Utils.assign ident
