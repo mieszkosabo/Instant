@@ -14,7 +14,7 @@ ALEX_OPTS  = --ghc
 
 # Default goal.
 
-all : jvm
+all : insc_jvm insc_llvm
 
 # Rules for building the parser.
 
@@ -30,8 +30,11 @@ Frontend/AbsInstant.hs Frontend/LexInstant.x Frontend/ParInstant.y Frontend/Prin
 Frontend/TestInstant : Frontend/AbsInstant.hs Frontend/LexInstant.hs Frontend/ParInstant.hs Frontend/PrintInstant.hs Frontend/TestInstant.hs
 	${GHC} ${GHC_OPTS} $@
 
-jvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs src/JVM/*.hs src/shared/*.hs
-	ghc -o jvm src/JVM/JVM.hs
+insc_jvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs src/JVM/*.hs src/JVM/*/*.hs src/shared/*.hs
+	ghc -o insc_jvm src/JVM/JVM.hs
+
+insc_llvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs src/LLVM/*.hs src/LLVM/*/*.hs src/shared/*/hs
+	ghc -o insc_llvm src/LLVM/llvm.hs
 # Rules for cleaning generated files.
 
 clean :
