@@ -30,11 +30,11 @@ Frontend/AbsInstant.hs Frontend/LexInstant.x Frontend/ParInstant.y Frontend/Prin
 Frontend/TestInstant : Frontend/AbsInstant.hs Frontend/LexInstant.hs Frontend/ParInstant.hs Frontend/PrintInstant.hs Frontend/TestInstant.hs
 	${GHC} ${GHC_OPTS} $@
 
-insc_jvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs src/JVM/*.hs src/JVM/*/*.hs src/shared/*.hs
-	ghc -o insc_jvm src/JVM/JVM.hs
+insc_jvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs Src/JVM/*.hs Src/JVM/*/*.hs Src/Shared/*.hs
+	${GHC} -o insc_jvm Src/JVM/JVM.hs
 
-insc_llvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs src/LLVM/*.hs src/LLVM/*/*.hs src/shared/*/hs
-	ghc -o insc_llvm src/LLVM/llvm.hs && llvm-as -o lib/runtime.bc lib/runtime.ll
+insc_llvm: Frontend/AbsInstant.hs Frontend/ParInstant.hs Frontend/LexInstant.hs Frontend/Frontend.hs Src/LLVM/*.hs Src/LLVM/*/*.hs Src/Shared/*.hs
+	${GHC} -o insc_llvm Src/LLVM/LLVM.hs && llvm-as -o lib/runtime.bc lib/runtime.ll
 # Rules for cleaning generated files.
 
 clean :
