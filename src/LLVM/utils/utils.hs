@@ -12,12 +12,14 @@ getFreshId = do
   put (tail stream, store)
   return $ "%t" ++ show nextNum
 
-lookup :: Id -> LLVMIC (Address, Code)
-lookup ident = do
+lookup :: Id -> Bool -> LLVMIC (Address, Code)
+lookup ident isAssignment = do
   (_, store) <- get
   case M.lookup ident store of
     Just addr -> return (addr, [])
     Nothing -> do
       addr <- getFreshId
-      let code = [addr ++ " = alloca i32", "store i32 0, i32* " ++ addr]
+      (stream, _) <- get
+      put (stream, M.insert ident addr store)
+      let code = [addr ++ " = alloca i32", if isAssignment then "" else "store i32 0, i32* " ++ addr]
       return (addr, code)

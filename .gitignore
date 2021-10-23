@@ -1,5 +1,7 @@
 *.hi
 *.o
+*.out
+*.class
 .DS_Store
 insc_jvm
 insc_llvm
