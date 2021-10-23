@@ -5,4 +5,5 @@ insc_jvm
 insc_llvm
 *.j
 *.ll
+!lib/runtime.ll
 *.bc

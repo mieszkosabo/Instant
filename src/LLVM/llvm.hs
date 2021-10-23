@@ -34,6 +34,7 @@ main = do
   let (cmdsList, _) = runLLVMIC stmts
   let cmds = unlines cmdsList
   let newFilename = replaceFileExtension ".ins" ".ll" $ head files
+  let bytecodeFilename = replaceFileExtension ".ll" ".bc" newFilename
   writeFile newFilename $ writeLLVMFile cmds
-
--- TODO compilacja
+  callCommand $ "llvm-as -o " ++ bytecodeFilename ++ " " ++ newFilename
+  callCommand $ "llvm-link -o " ++ bytecodeFilename ++ " " ++ bytecodeFilename ++ " lib/runtime.bc"
