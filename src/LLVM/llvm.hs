@@ -16,16 +16,8 @@ writeLLVMFile cmds =
     ++ "ret i32 0\n"
     ++ "}\n"
 
--- TODO: put to shared
-f :: [String] -> Stmt -> LLVMIC [String]
-f acc stmt = do
-  code <- generateCodeStmt stmt
-  return $ acc ++ code
-
-execStmts = foldM f []
-
 runLLVMIC :: [Stmt] -> ([String], Store)
-runLLVMIC stmts = runState (execStmts stmts) ([1 ..], M.empty)
+runLLVMIC stmts = runState (execStmts generateCodeStmt stmts) ([1 ..], M.empty)
 
 main :: IO ()
 main = do

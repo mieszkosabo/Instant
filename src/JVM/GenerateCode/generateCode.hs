@@ -4,8 +4,9 @@ import Frontend.AbsInstant
 import Src.JVM.RequiredStackSize.RequiredStackSize (requiredStackSize)
 import Src.JVM.Types
 import Src.JVM.Utils.Utils as Utils
+import Src.Shared.Types
 
-generateCodeExp :: Exp -> JVMIC [String]
+generateCodeExp :: Exp -> JVMIC Code
 generateCodeExp (ExpAdd e e') = do
   code' <- generateCodeExp e'
   code <- generateCodeExp e
@@ -33,7 +34,7 @@ generateCodeExp (ExpVar (Ident ident)) = do
     then return [push 0] -- converting undeclared variables to 0s
     else return [load idx]
 
-generateCodeStmt :: Stmt -> JVMIC [String]
+generateCodeStmt :: Stmt -> JVMIC Code
 -- evaluate expr and print its value
 generateCodeStmt (SExp e) = do
   code <- generateCodeExp e

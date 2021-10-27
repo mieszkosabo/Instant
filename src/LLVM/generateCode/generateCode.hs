@@ -20,7 +20,7 @@ generateCodeExp (ExpDiv e e') = do
   (res, code) <- generateCodeExp e
   (res', code') <- generateCodeExp e'
   newId <- getFreshId
-  return (newId, code ++ code' ++ [newId ++ " = div i32 " ++ res ++ ", " ++ res'])
+  return (newId, code ++ code' ++ [newId ++ " = sdiv i32 " ++ res ++ ", " ++ res'])
 generateCodeExp (ExpMul e e') = do
   (res, code) <- generateCodeExp e
   (res', code') <- generateCodeExp e'

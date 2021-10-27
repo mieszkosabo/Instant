@@ -11,19 +11,12 @@ import Src.Shared.Utils
 import System.Environment (getArgs, getProgName)
 import System.Process (callCommand)
 
-f :: [String] -> Stmt -> JVMIC [String]
-f acc stmt = do
-  code <- generateCodeStmt stmt
-  return $ acc ++ code
-
-execStmts = foldM f []
-
 runJVMIC :: [Stmt] -> ([String], Store)
-runJVMIC stmts = runState (execStmts stmts) Map.empty
+runJVMIC stmts = runState (execStmts generateCodeStmt stmts) Map.empty
 
-writeJVMFile :: String -> Int -> Int -> String
-writeJVMFile cmds stackLimit localsLimit =
-  ".class public Program\n"
+writeJVMFile :: String -> String -> Int -> Int -> String
+writeJVMFile classname cmds stackLimit localsLimit =
+  ".class public " ++ classname ++ "\n"
     ++ ".super java/lang/Object\n\n"
     ++ ".method public <init>()V\n"
     ++ "aload_0\n"
@@ -31,7 +24,7 @@ writeJVMFile cmds stackLimit localsLimit =
     ++ "return\n"
     ++ ".end method\n\n"
     ++ ".method public static main([Ljava/lang/String;)V\n"
-    ++ ".limit stack " 
+    ++ ".limit stack "
     ++ show stackLimit
     ++ "\n"
     ++ (if localsLimit > 0 then ".limit locals " ++ show localsLimit ++ "\n" else "")
@@ -48,5 +41,6 @@ main = do
   let stackLimit = requiredStackSizeForProgram stmts
   let localsLimit = Map.size store
   let newFilename = replaceFileExtension ".ins" ".j" $ head files
-  writeFile newFilename $ writeJVMFile cmds stackLimit localsLimit
+  let classname = removeExtension newFilename
+  writeFile newFilename $ writeJVMFile classname cmds stackLimit localsLimit
   callCommand $ "java -jar lib/jasmin.jar " ++ newFilename ++ " -d " ++ getDirectoryFromFilepath newFilename
