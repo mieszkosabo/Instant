@@ -11,7 +11,7 @@ if len(sys.argv) != 2:
 
 testDir = sys.argv[1]
 
-insFiles = [f for f in os.listdir(testDir) if f.endswith('.ins')]
+insFiles = [f for f in os.listdir(testDir) if f.endswith('.ins') and not f.startswith(".")]
 print(insFiles)
 
 for inputFile in insFiles:
